@@ -28,17 +28,17 @@ format_output() {
   # the columns available in the window.
 
   local message=$1
-  local n_cols=`tput cols`
+  local -r n_cols=$(tput cols)
   local prefix_template=" 00:00:00 "
   local line_chars=$(( ${#message} + ${#prefix_template} + 1 ))
 
   if [[ $line_chars -gt $n_cols ]]; then
     local trunc_chars="..."
-    local truncate_length=$(( $n_cols - ${#prefix_template} - ${#trunc_chars} - 1 ))
-    message="`echo "$message" | cut -c -$truncate_length`$trunc_chars"
+    local truncate_length=$(( n_cols - ${#prefix_template} - ${#trunc_chars} - 1 ))
+    message="$(echo "$message" | cut -c -$truncate_length)$trunc_chars"
   fi
 
-  echo $message
+  echo "$message"
 }
 
 
@@ -46,14 +46,14 @@ countdown() {
   local duration=$1
   local message=$2
 
-  local hour=$(( $duration / 60 ))
-  local min=$(( $duration - 60 * $hour - 1 ))
+  local hour=$(( duration / 60 ))
+  local min=$(( duration - 60 * hour - 1 ))
   local sec=59
 
   while [ $hour -ge 0 ]; do
     while [ $min -ge 0 ]; do
       while [ $sec -ge 0 ]; do
-        message=`format_output "$message"`
+        message=$(format_output "$message")
 
         # \033[1;43m --> yellow background
         # \033[1;30m --> black foreground
