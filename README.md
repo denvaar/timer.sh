@@ -24,5 +24,6 @@ sh timer.sh 100
 
 
 
-https://user-images.githubusercontent.com/10538978/143665843-f7c9990a-21bd-40f9-85f1-be25183ae432.mov
+![demo](https://user-images.githubusercontent.com/10538978/143665886-9b895c71-25b8-43ad-a38c-ff358ed068b9.gif)
+
 
